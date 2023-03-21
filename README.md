@@ -1,17 +1,19 @@
 # RestfulAPIDemos-JAXRS
 
-Rest API Demos using Jakarta ee 10 
+Rest API Demos using JAX-RS
 
 ## Technologies Used
 
 - Java - JDK 17
 - Jakarta ee 10
-- JAX-RS (Jersey)
+- JAX-RS (impl used: jersey)
 - JSON-B
 - JAX-B
-- Maven
+- Maven (archetype used: "jersey-quickstart-webapp", version: 3.1.1)
 - Lombok
 - Tomcat 10
+
+
 
 ## Run Locally
 
