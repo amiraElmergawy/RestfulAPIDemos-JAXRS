@@ -30,8 +30,15 @@ Go to the project directory
 ```
 
 - Run your tomcat apache server and then change the configuration of tomcat in pom.xml.
-- Finally, deploy the application using the following maven command.
+- Deploy the application using the following maven command.
 
 ```bash
     mvn clean package tomcat7:deploy
 ```
+
+- Finally, open your browser and type the following url to test <a href="http://localhost:9090/rest-jersey/webapi/users">Users </a> resource
+
+  
+     http://localhost:9090/rest-jersey/webapi/users 
+
+- Note that my tomcat server port is '9090', So you need to change this to your own port
