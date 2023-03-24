@@ -11,40 +11,45 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Root resource (exposed at "myresource" path)
+ * Root usersResource (exposed at "users" path)
  */
 @Path("users")
 public class MyResource {
 
     private Map<Integer, UserModel> usersMap = new ConcurrentHashMap<>();
-    private AtomicInteger idCounter = new AtomicInteger(100); //users ids will begin with 100
+    private AtomicInteger idCounter = new AtomicInteger(100); // users ids will begin with 100
+
+
+     public MyResource(){
+         usersMap.put(idCounter.getAndIncrement(), new UserModel("user1","123"));
+         usersMap.put(idCounter.getAndIncrement(), new UserModel("user2","456"));
+     }
+
+
     /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
+     * Method handling HTTP GET requests. The returned array of objects will be sent
+     * to the client as "JSON" media type.
      *
-     * @return String that will be returned as a text/plain response.
+     * @return Map that will be returned as a JSON response.
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
-        return "Got it!";
+    @Produces(MediaType.APPLICATION_JSON) // by default produces JSON if you provide JSON in your project dependencies
+    public Map<Integer, UserModel> getAllUsers(){
+        return usersMap;
     }
 
 
-//    @GET
-//    @Path("{users}")
-//    @Produces(MediaType.APPLICATION_JSON) // by default produces JSON if you provide JSON in your project dependencies
-////    @Produces(MediaType.APPLICATION_XML)
-//    public Map<Integer, UserModel> getAllUsers(){
-//        return usersMap;
-//    }
-
+    /**
+     * Method handling HTTP GET request. The returned object will be sent according to the entered id in the url
+     * to the client as "XML" media type.
+     *
+     * @return Object that will be returned as XML response.
+     */
     @GET
     @Path("{id}")
-//    @Produces(MediaType.APPLICATION_JSON) // by default produces JSON if you provide JSON in your project dependencies
     @Produces(MediaType.APPLICATION_XML)
-    public UserModel getUser(@PathParam("id") int UserId){
-        return new UserModel();
+    public UserModel getUser(@PathParam("id") int userId){
+        return usersMap.get(userId);
     }
 
 }
