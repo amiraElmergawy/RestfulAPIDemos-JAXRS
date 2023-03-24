@@ -7,8 +7,8 @@ Rest API Demos using JAX-RS
 - Java - JDK 17
 - Jakarta ee 10
 - JAX-RS (impl used: jersey)
-- JSON-B
-- JAX-B
+- JSON-B (for JSON binding)
+- JAX-B (for XML binding)
 - Maven (archetype used: "jersey-quickstart-webapp", version: 3.1.1)
 - Lombok
 - Tomcat 10
