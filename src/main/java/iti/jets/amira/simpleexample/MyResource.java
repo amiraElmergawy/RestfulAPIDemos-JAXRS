@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Root usersResource (exposed at "users" path)
  */
-@Path("users")
+@Path("v1/users")
 public class MyResource {
 
     private Map<Integer, UserModel> usersMap = new ConcurrentHashMap<>();
