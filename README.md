@@ -36,9 +36,9 @@ Go to the project directory
     mvn clean package tomcat7:deploy
 ```
 
-- Finally, open your browser and type the following url to test <a href="http://localhost:9090/rest-jersey/webapi/users">Users </a> resource
+- Finally, open your browser and type the following url to test <a href="http://localhost:9090/rest-jersey/webapi/v1/users">Users </a> resource from simple example
 
   
-     http://localhost:9090/rest-jersey/webapi/users 
+     http://localhost:9090/rest-jersey/webapi/v1/users 
 
 - Note that my tomcat server port is '9090', So you need to change this to your own port
