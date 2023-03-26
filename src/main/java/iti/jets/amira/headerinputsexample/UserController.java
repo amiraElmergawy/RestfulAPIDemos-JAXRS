@@ -48,7 +48,7 @@ public class UserController {
      * @return Object that will be returned as XML response.
      */
     @GET
-    @Path("{id:}")
+    @Path("{id://d+}") // regex matches digits only
     @Produces(MediaType.APPLICATION_XML)
     public UserModel getUserById(@PathParam("id") int userId){
         return usersMap.get(userId);
@@ -62,7 +62,7 @@ public class UserController {
      * @return Object that will be returned as JSON response, or null is the entered data is not correct
      */
     @GET
-    @Path("{username}-{password}")
+    @Path("{username: [a-zA-Z0-9]+}-{password}") // username regex matches only letters & digits
     @Produces(MediaType.APPLICATION_JSON)
     public UserModel getUserByUsernameAndPassword(@PathParam("username") String username,
                                        @PathParam("password") String password){
@@ -73,4 +73,6 @@ public class UserController {
         return null; // 204 no-content response
     }
 
+
+    
 }
