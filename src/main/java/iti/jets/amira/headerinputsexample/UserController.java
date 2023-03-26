@@ -1,6 +1,9 @@
 package iti.jets.amira.headerinputsexample;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -11,19 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Root usersResource (exposed at "users" path)
+ * Root usersResource (exposed at "v2/users" path)
  */
 @Path("v2/users")
 public class UserController {
 
-    private Map<Integer, UserModel> usersMap = new ConcurrentHashMap<>();
-    private AtomicInteger idCounter = new AtomicInteger(100); // users ids will begin with 100
-
-
-     public UserController(){
-         usersMap.put(idCounter.getAndIncrement(), new UserModel("user1","123"));
-         usersMap.put(idCounter.getAndIncrement(), new UserModel("user2","456"));
-     }
+    private static Map<Integer, UserModel> usersMap = new ConcurrentHashMap<>();
+    private static AtomicInteger idCounter = new AtomicInteger(100); // users ids will begin with 100
 
 
     /**
@@ -73,6 +70,19 @@ public class UserController {
         return null; // 204 no-content response
     }
 
+    //FormParam Test
+    /**
+     * Method handling HTTP POST request. The returned object will be sent according to the entered username and password in the url
+     * to the client as "JSON" media type.
+     *
+     * @return Object that will be returned as JSON response, or null is the entered data is not correct
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    public String addUser(@FormParam("username") String username,
+                                       @FormParam("password") String password){
+        usersMap.put(idCounter.getAndIncrement(), new UserModel(username,password));
+        return "added succefully";
+    }
 
-    
 }
