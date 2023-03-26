@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Root usersResource (exposed at "users" path)
+ * Root usersResource (exposed at "v1/users" path)
  */
 @Path("v1/users")
 public class MyResource {
