@@ -48,7 +48,7 @@ public class UserController {
      * @return Object that will be returned as XML response.
      */
     @GET
-    @Path("{id}")
+    @Path("{id:}")
     @Produces(MediaType.APPLICATION_XML)
     public UserModel getUserById(@PathParam("id") int userId){
         return usersMap.get(userId);
