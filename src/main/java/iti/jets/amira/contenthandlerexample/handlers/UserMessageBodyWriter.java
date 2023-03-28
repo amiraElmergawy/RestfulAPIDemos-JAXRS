@@ -23,7 +23,8 @@ public class UserMessageBodyWriter implements MessageBodyWriter<UserModel> {
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
         // check if the class can be represented as xml or not
-        return type.getClass().isAnnotationPresent(XmlRootElement.class);
+        // return type.getClass().isAnnotationPresent(XmlRootElement.class);
+        return true;
     }
 
     @Override
