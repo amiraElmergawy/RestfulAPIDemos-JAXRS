@@ -29,7 +29,7 @@ public class UserController {
      * @return Map that will be returned as a JSON response.
      */
     @GET
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.TEXT_PLAIN)
     public Map<Integer,UserModel> getAllUsers(){ 
         return usersMap;
     }
