@@ -1,5 +1,6 @@
 package iti.jets.amira.contenthandlerexample;
 
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -8,6 +9,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -56,10 +58,27 @@ public class UserController {
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
-    public String addUser(@FormParam("username") String username,
+    public String addUserByFormParams(@FormParam("username") String username,
             @FormParam("password") String password) {
         usersMap.put(idCounter.getAndIncrement(), new UserModel(username, password));
         return "added succefully";
     }
+
+
+    /**
+     * Method handling HTTP POST request. The returned object will be sent according
+     * to the entered username and password in the url
+     * to the client as simple text message media type.
+     *
+     * @return Object that will be returned as text response
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String addUser(List<UserModel> users) {
+        // usersMap.put(idCounter.getAndIncrement(), new UserModel(username, password));
+        return "added succefully";
+    }
+
 
 }
