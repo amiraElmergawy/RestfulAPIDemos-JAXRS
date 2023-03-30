@@ -77,7 +77,8 @@ public class UserController {
     @Consumes(MediaType.TEXT_PLAIN)
     public String addUser(List<UserModel> users) {
         // usersMap.put(idCounter.getAndIncrement(), new UserModel(username, password));
-        return "added succefully";
+        
+        return users.toString();
     }
 
 
