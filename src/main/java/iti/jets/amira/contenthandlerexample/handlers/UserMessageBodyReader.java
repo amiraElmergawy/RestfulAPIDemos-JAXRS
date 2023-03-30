@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,57 +22,88 @@ public class UserMessageBodyReader implements MessageBodyReader<List<UserModel>>
 
     @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        return Map.class.isAssignableFrom(type);
+        return List.class.isAssignableFrom(type);
+    }
+
+    @Override
+    public List<UserModel> readFrom(Class<List<UserModel>> type, Type genericType,
+            Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders,
+            InputStream inputStream) throws IOException, WebApplicationException {
+        List<UserModel> usersList = null;
+        // [UserModel(username=amira, password=123), UserModel(username=amira,
+        // password=123)]
+        String listString = new String(inputStream.readAllBytes());
+        listString = listString.trim();
+        listString = listString.replace("[", ""); // UserModel(username=amira, password=123), UserModel(username=amira,
+                                                  // password=123)]
+        listString = listString.replace("]", ""); // UserModel(username=amira, password=123), UserModel(username=amira,
+                                                  // password=123)
+        String[] listValues = listString.split("),"); // ["UserModel(username=amira,
+                                                      // password=123","UserModel(username=amira, password=123)"]
+        for (var user : listValues) {
+            user = user.trim();
+            user = user.replace("UserModel(", ""); // "username=amira, password=123)"
+            user = user.replace(")", ""); // "username=amira, password=123"
+            String[] userDetails = user.split(",");// ["username=amira" , "password=123"]
+            var username = userDetails[0].trim().replace("username=", ""); // amira
+            var password = userDetails[1].trim().replace("password=", "");
+            if (usersList == null)
+                usersList = new ArrayList<>();
+            usersList.add(new UserModel(username, password));
+        }
+        return usersList;
+
     }
 
     // @Override
-    // public Map<Integer, UserModel> readFrom(Class<Map<Integer, UserModel>> type, Type genericType,
-    //         Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders,
-    //         InputStream entityStream) throws IOException, WebApplicationException {
+    // public Map<Integer, UserModel> readFrom(Class<Map<Integer, UserModel>> type,
+    // Type genericType,
+    // Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String>
+    // httpHeaders,
+    // InputStream inputStream) throws IOException, WebApplicationException {
 
-    //     UserModel userModel;
-    //     Map<Integer, UserModel> usersMap = null;
-    //     // {100=UserModel(username=amira, password=1234), 101=UserModel(username=amira,
-    //     // password=1234)}
-    //     String MapString = new String(entityStream.readAllBytes());
+    // UserModel userModel;
+    // Map<Integer, UserModel> usersMap = null;
+    // // {100=UserModel(username=amira, password=1234),
+    // 101=UserModel(username=amira,
+    // // password=1234)}
+    // String mapString = new String(inputStream.readAllBytes());
 
-    //     MapString = MapString.trim();
-    //     MapString = MapString.replace("{", ""); // 100=UserModel(username=amira, password=1234),
-    //                                             // 101=UserModel(username=amira, password=1234)}
-    //     MapString = MapString.replace("}", ""); // 100=UserModel(username=amira, password=1234),
-    //                                             // 101=UserModel(username=amira, password=1234)
-    //     MapString = MapString.trim(); // 100=UserModel(username=amira, password=1234), 101=UserModel(username=amira,
-    //                                   // password=1234)
+    // mapString = mapString.trim();
+    // mapString = mapString.replace("{", ""); // 100=UserModel(username=amira,
+    // password=1234),
+    // // 101=UserModel(username=amira, password=1234)}
+    // mapString = mapString.replace("}", ""); // 100=UserModel(username=amira,
+    // password=1234),
+    // // 101=UserModel(username=amira, password=1234)
+    // mapString = mapString.trim(); // 100=UserModel(username=amira,
+    // password=1234), 101=UserModel(username=amira,
+    // // password=1234)
 
-    //     String[] MapValues = MapString.split("), "); // {"100=UserModel(username=amira, password=1234" ,
-    //                                                  // "101=UserModel(username=amira, password=1234)"}
+    // String[] MapValues = mapString.split("), "); //
+    // {"100=UserModel(username=amira, password=1234" ,
+    // // "101=UserModel(username=amira, password=1234)"}
 
-    //     for (String users : MapValues) {
+    // for (String users : MapValues) {
 
-    //         users = users.replace("UserModel(", ""); // "100=username=amira, password=1234)"
-    //         users = users.replace(")", ""); // "100=username=amira, password=1234"
+    // users = users.replace("UserModel(", ""); // "100=username=amira,
+    // password=1234)"
+    // users = users.replace(")", ""); // "100=username=amira, password=1234"
 
-    //         String[] usersValues = users.split("="); // {"100", "username" , "amira, password" , "1234"} //4
+    // String[] usersValues = users.split("="); // {"100", "username" , "amira,
+    // password" , "1234"} //4
 
-    //         int mapKey = Integer.parseInt(usersValues[0]); //100
-    //         String username = usersValues[2].replace(", password", ""); //"amira"
-    //         String password = usersValues[3]; //"1234"
-    //         userModel = new UserModel(username, password);
-    //         if(usersMap == null) usersMap = new ConcurrentHashMap<>(); 
-    //         usersMap.put(mapKey, userModel);
-
-    //     }
-
-    //     return usersMap; // need to be list of users(:
+    // int mapKey = Integer.parseInt(usersValues[0]); //100
+    // String username = usersValues[2].replace(", password", ""); //"amira"
+    // String password = usersValues[3]; //"1234"
+    // userModel = new UserModel(username, password);
+    // if(usersMap == null) usersMap = new ConcurrentHashMap<>();
+    // usersMap.put(mapKey, userModel);
 
     // }
 
+    // return usersMap; // need to be list of users(:
 
-    @Override
-    public List<UserModel> readFrom(Class<List<UserModel>> arg0, Type arg1, Annotation[] arg2, MediaType arg3,
-            MultivaluedMap<String, String> arg4, InputStream arg5) throws IOException, WebApplicationException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readFrom'");
-    }
+    // }
 
 }
