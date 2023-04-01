@@ -43,21 +43,20 @@ public class UserMessageBodyReader implements MessageBodyReader<List<UserModel>>
             Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders,
             InputStream inputStream) throws IOException, WebApplicationException {
         List<UserModel> usersList = null;
-        // [{username=amira, password=123}, {username=amira, password=123}]
         String listString = new String(inputStream.readAllBytes());
-        listString = listString.replace("[", ""); // {username=amira, password=123}, {username=amira, password=123}]
-        listString = listString.replace("]", ""); // {username=amira, password=123}, {username=amira, password=123}
-        System.out.println("before trim:"+listString);
-        listString = listString.replaceAll(" ", ""); //{username=amira,password=123},{username=amira,password=123}
-        System.out.println("after trim:"+listString);
-        String[] listValues = listString.split("},"); // ["{username=amira, password=123","{username=amira, password=123}"]
+        listString = listString.replace("[", ""); // {"username":"amira", "password":"123"}, {"username":"amira", "password":"123"}]
+        listString = listString.replace("]", ""); // {"username":"amira", "password":"123"}, {"username":"amira", "password":"123"}
+        listString = listString.replaceAll(" |\"", ""); //{"username":"amira", "password":"123"},{"username":"amira", "password":"123"}
+        String[] listValues = listString.split("},"); // ["{"username":"amira", "password":"123"}","{"username":"amira", "password":"123"}"]
         List.of(listValues).stream().forEach((e)-> System.out.println(e));
         for (var user : listValues) {
-            user = user.replace("(", ""); // "username=amira, password=123)"
-            user = user.replace(")", ""); // "username=amira, password=123"
-            String[] userDetails = user.split(",");// ["username=amira" , "password=123"]
-            var username = userDetails[0].replace("username=", ""); // amira
-            var password = userDetails[1].replace("password=", ""); // password
+            user = user.replace("{", ""); // {"username":"amira", "password":"123"
+            user = user.replace("}", ""); // "username":"amira", "password":"123"
+            String[] userDetails = user.split(",");// ["username":"amira" ,
+                                                        //"password":"123"]
+            List.of(userDetails).stream().forEach((e)-> System.out.println(e));
+            var username = userDetails[0].trim().replace("username:", ""); // amira
+            var password = userDetails[1].trim().replace("password:", ""); // password
             if (usersList == null)
                 usersList = new ArrayList<>();
             usersList.add(new UserModel(username, password));
@@ -65,4 +64,5 @@ public class UserMessageBodyReader implements MessageBodyReader<List<UserModel>>
         return usersList;
 
     }
+
 }
