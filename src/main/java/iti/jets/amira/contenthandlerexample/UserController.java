@@ -77,9 +77,20 @@ public class UserController {
     @Consumes(MediaType.TEXT_PLAIN)
     public String addUser(List<UserModel> users) {
         // usersMap.put(idCounter.getAndIncrement(), new UserModel(username, password));
-        
         return users.toString();
     }
 
-
+/**
+     * Method handling HTTP POST request. The returned object will be sent according
+     * to the entered username and password in the url
+     * to the client as simple text message media type.
+     *
+     * @return Object that will be returned as text response
+     */
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Map<Integer,UserModel> addUserTest(List<UserModel> users) {
+        return usersMap;
+    }
 }
