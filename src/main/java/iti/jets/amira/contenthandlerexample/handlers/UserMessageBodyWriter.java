@@ -29,8 +29,7 @@ public class UserMessageBodyWriter implements MessageBodyWriter <Map<Integer, Us
             MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream outputStream)
             throws IOException, WebApplicationException {
         //{100=UserModel(username=amira, password=1234), 101=UserModel(username=amira, password=1234)}
-        outputStream.write(users.keySet().toString().getBytes());
-        
+        outputStream.write(users.toString().getBytes());
     }
 
 }
