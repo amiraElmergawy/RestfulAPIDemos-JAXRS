@@ -85,7 +85,7 @@ public class UserController {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Map<Integer,UserModel> addUserTest(List<UserModel> users) {
+    public Map<Integer,UserModel> anotherPostMethod(List<UserModel> users) {
         return usersMap;
     }
 }
