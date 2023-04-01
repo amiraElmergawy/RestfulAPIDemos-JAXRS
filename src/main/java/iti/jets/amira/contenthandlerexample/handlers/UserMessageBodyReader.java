@@ -26,7 +26,7 @@ public class UserMessageBodyReader implements MessageBodyReader<List<UserModel>>
         return List.class.isAssignableFrom(type);
     }
 
-    /*
+    /* input body request example:
      * [
     {
         "username":"amira",
