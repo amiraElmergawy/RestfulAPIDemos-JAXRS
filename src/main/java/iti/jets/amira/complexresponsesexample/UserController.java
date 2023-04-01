@@ -1,21 +1,17 @@
 package iti.jets.amira.complexresponsesexample;
 
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 /**
  * Root usersResource (exposed at "v4/users" path)
@@ -55,16 +51,31 @@ public class UserController {
 
 
     /**
-     * Method handling HTTP POST request. The 
+     * Method handling HTTP POST request. The added object obtained from request body
      * to the client as simple text message media type.
      *
-     * @return Object that will be returned as text response
+     * @return success message as text response
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
     public String addUser(UserModel user){
         usersMap.put(idCounter.getAndIncrement(), user);
         return "added succefully";
+    }
+
+
+
+
+    @PUT
+    @Path("{id}")
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_XML)
+    public String editUser(@PathParam("id") int userId, UserModel user){
+        if(usersMap.containsKey(userId)){
+            usersMap.put(userId, user);
+            return "updated succefully";
+        }
+        return "invalid user"; // not found // but status code is 200 );
     }
 
 }
