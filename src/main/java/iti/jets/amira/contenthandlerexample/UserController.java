@@ -50,11 +50,10 @@ public class UserController {
     }
 
     /**
-     * Method handling HTTP POST request. The returned object will be sent according
-     * to the entered username and password in the url
-     * to the client as simple text message media type.
+     * Method handling HTTP POST request. The object will be added according
+     * to the entered username and password in the form to our map.
      *
-     * @return Object that will be returned as text response
+     * @return success message
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -66,27 +65,22 @@ public class UserController {
 
 
     /**
-     * Method handling HTTP POST request. The returned object will be sent according
-     * to the entered username and password in the url
-     * to the client as simple text message media type.
+     * Method handling HTTP POST request. The users list will be added according
+     * to the entered username and password in the request body to our map.
      *
-     * @return Object that will be returned as text response
+     * @return success message
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.TEXT_PLAIN)
     public String addUser(List<UserModel> users) {
-        // usersMap.put(idCounter.getAndIncrement(), new UserModel(username, password));
-        return users.toString();
+        for (UserModel user : users) {
+            usersMap.put(idCounter.getAndIncrement(), user);
+        }
+        return "User added successfully";
     }
 
-/**
-     * Method handling HTTP POST request. The returned object will be sent according
-     * to the entered username and password in the url
-     * to the client as simple text message media type.
-     *
-     * @return Object that will be returned as text response
-     */
+
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
