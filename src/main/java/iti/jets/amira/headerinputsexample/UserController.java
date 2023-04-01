@@ -1,6 +1,5 @@
 package iti.jets.amira.headerinputsexample;
 
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
@@ -77,10 +76,10 @@ public class UserController {
 
     //FormParam Test
     /**
-     * Method handling HTTP POST request. The returned object will be sent according to the entered username and password in the url
-     * to the client as simple text message media type.
+     * Method handling HTTP POST request. The object will be added according
+     * to the entered username and password in the form to our map.
      *
-     * @return Object that will be returned as text response
+     * @return success message
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
