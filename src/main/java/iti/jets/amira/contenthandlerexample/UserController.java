@@ -81,6 +81,7 @@ public class UserController {
     }
 
 
+    //we can add another post method but using different consumers and producers
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
