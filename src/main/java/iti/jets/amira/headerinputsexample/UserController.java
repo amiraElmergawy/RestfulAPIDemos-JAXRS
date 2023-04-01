@@ -65,8 +65,7 @@ public class UserController {
     @GET
     @Path("{username: [a-zA-Z0-9]+}-{password}") // username regex matches only letters & digits
     @Produces(MediaType.APPLICATION_JSON)
-    public UserModel getUserByUsernameAndPassword(@PathParam("username") String username,
-                                       @PathParam("password") String password){
+    public UserModel getUserByUsernameAndPassword(@PathParam("username") String username, @PathParam("password") String password){
         for (var user: usersMap.values()) {
             if (user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password))
                 return user;
@@ -84,7 +83,7 @@ public class UserController {
     @POST
     @Produces(MediaType.TEXT_HTML)
     public String addUser(@FormParam("username") String username, // FormParam is not optional 
-                                       @FormParam("password") String password){
+                        @FormParam("password") String password){
         usersMap.put(idCounter.getAndIncrement(), new UserModel(username,password));
         return "added succefully";
     }
