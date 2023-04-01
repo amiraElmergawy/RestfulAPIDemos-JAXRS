@@ -32,7 +32,7 @@ public class UserController {
      * Method handling HTTP GET requests. The returned array of objects will be sent
      * to the client as "JSON" media type.
      *
-     * @return Map that will be returned as a JSON response.
+     * @return list that will be returned as a JSON response.
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON) // by default produces JSON if you provide JSON in your project dependencies
