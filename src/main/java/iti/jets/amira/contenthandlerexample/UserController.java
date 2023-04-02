@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import iti.jets.amira.models.UserModel;
+
 /**
  * Root usersResource (exposed at "v3/users" path)
  */
@@ -30,7 +32,7 @@ public class UserController {
      * @return Map that will be returned as a JSON response.
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN) // uses custom body writer
     public Map<Integer, UserModel> getAllUsers() {
         return usersMap;
     }
@@ -72,7 +74,7 @@ public class UserController {
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN) // uses custom body reader
     public String addUser(List<UserModel> users) {
         for (UserModel user : users) {
             usersMap.put(idCounter.getAndIncrement(), user);
@@ -83,7 +85,7 @@ public class UserController {
 
     //we can add another post method but using different consumers and producers
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN) // uses custom body writer
     @Consumes(MediaType.APPLICATION_JSON)
     public Map<Integer,UserModel> anotherPostMethod(List<UserModel> users) {
         return usersMap;
