@@ -16,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import iti.jets.amira.models.UserModel;
+
 /**
  * Root usersResource (exposed at "v2/users" path)
  */

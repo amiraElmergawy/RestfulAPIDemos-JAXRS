@@ -1,4 +1,4 @@
-package iti.jets.amira.simpleexample;
+package iti.jets.amira.models;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;

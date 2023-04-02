@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import iti.jets.amira.models.UserModel;
+
 /**
  * Root usersResource (exposed at "v1/users" path)
  */
