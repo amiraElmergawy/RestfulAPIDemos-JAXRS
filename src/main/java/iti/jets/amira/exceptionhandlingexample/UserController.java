@@ -77,11 +77,14 @@ public class UserController {
     @Produces(MediaType.APPLICATION_XML)
     public Response getUserById(@PathParam("id") int userId){
         var user = usersMap.get(userId);
-        if(user.getUsername() != null){
-            ResponseBuilder responseBuilder = Response.ok();
+        System.out.println(user);
+        if(user != null){
+            ResponseBuilder responseBuilder = Response.ok(user);
             return responseBuilder.build();
         }
-        throw new WebApplicationException(); // default "internal-server-error"=>500
+        // else throw new WebApplicationException(); // default "internal-server-error" => 500
+        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
     }
 
 
@@ -119,7 +122,7 @@ public class UserController {
             usersMap.put(userId, user);
             return responseBuilder.build();
         }
-        throw new WebApplicationException("invalid user id", Response.Status.NOT_FOUND);
+        throw new WebApplicationException(Response.Status.NOT_FOUND);
 
     }
 
