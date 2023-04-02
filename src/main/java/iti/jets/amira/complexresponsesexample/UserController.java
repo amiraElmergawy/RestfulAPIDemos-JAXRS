@@ -97,8 +97,9 @@ public class UserController {
 
 
     /**
-     * Method handling HTTP PUT request. The object obtained from request body used to be replaced???? 
-     * to the client as simple text message media type.
+     * Method handling HTTP PUT request. The searched object using entered id 
+     * will be replaced by the object entered in the message body 
+     * then send to the client simple text message media type.
      *
      * @return success message as text response
      */
@@ -106,12 +107,16 @@ public class UserController {
     @Path("{id}")
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_XML)
-    public String editUser(@PathParam("id") int userId, UserModel user){
-        if(usersMap.containsKey(userId)){
+    public Response editUser(@PathParam("id") int userId, UserModel user){
+
+        ResponseBuilder responseBuilder  = Response.ok("updated succefully");
+        if(usersMap.containsKey(userId)){ // user exist
             usersMap.put(userId, user);
-            return "updated succefully";
+            return responseBuilder.build();
         }
-        return "invalid user"; // not found // but status code is 200 );
+        return responseBuilder.entity("invalid user").status(404).build(); // status will be overwritten
+
     }
+
 
 }
