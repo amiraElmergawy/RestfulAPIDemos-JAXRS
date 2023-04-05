@@ -84,7 +84,7 @@ public class UserController {
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
-    public String addUser(@FormParam("username") String username, // FormParam is not optional 
+    public String addUser(@FormParam("username") String username, // FormParam is not optional as JAX-RS doesn't inject any default values for Form params
                         @FormParam("password") String password){
         usersMap.put(idCounter.getAndIncrement(), new UserModel(username,password));
         return "added succefully";
