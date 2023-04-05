@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import iti.jets.amira.exceptionhandlingexample.exceptions.UserNotFoundException;
 import iti.jets.amira.models.UserModel;
 
 /**
@@ -122,7 +123,7 @@ public class UserController {
             usersMap.put(userId, user);
             return responseBuilder.build();
         }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        throw new UserNotFoundException();
 
     }
 
