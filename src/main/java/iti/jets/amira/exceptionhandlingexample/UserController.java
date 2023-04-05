@@ -22,8 +22,7 @@ import iti.jets.amira.exceptionhandlingexample.exceptions.UserNotFoundException;
 import iti.jets.amira.models.UserModel;
 
 /**
- * Using Response abstract class, its builder
- * generic entity
+ * Exception Handling
  *
  * Root usersResource (exposed at "v5/users" path)
  */
