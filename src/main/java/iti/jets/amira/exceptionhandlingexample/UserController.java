@@ -1,4 +1,4 @@
-package iti.jets.amira.complexresponsesexample;
+package iti.jets.amira.exceptionhandlingexample;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -7,6 +7,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,20 +18,22 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import iti.jets.amira.exceptionhandlingexample.exceptions.UserNotFoundException;
 import iti.jets.amira.models.UserModel;
 
 /**
  * Using Response abstract class, its builder
  * generic entity
- *
- * Root usersResource (exposed at "v4/users" path)
+ * 
+ * Root usersResource (exposed at "v5/users" path)
  */
-@Path("v4/users")
+@Path("v5/users")
 public class UserController {
 
     private static Map<Integer, UserModel> usersMap = new ConcurrentHashMap<>();
     private static AtomicInteger idCounter = new AtomicInteger(100); // users ids will begin with 100
 
+    
     /**
      * Method handling HTTP GET requests. The returned list of objects will be sent
      * to the client as "JSON" media type.
@@ -39,12 +42,13 @@ public class UserController {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsersJSON() {
+    public Response getAllUsersJSON(){
 
         ResponseBuilder responseBuilder = Response.ok(usersMap.values());
         return responseBuilder.build();
-
+        
     }
+
 
     /**
      * Method handling HTTP GET requests. The returned list of objects will be sent
@@ -54,20 +58,17 @@ public class UserController {
      */
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Response getAllUsers() {
+    public Response getAllUsers(){
 
-        GenericEntity<Collection<UserModel>> genericEntity = new GenericEntity<>(usersMap.values()) {
-        }; // generic entity works as type-erasure it replaces all type parameters in
-           // generic types with their bounds or Object if the type parameters are
-           // unbounded
+        GenericEntity<Collection<UserModel>> genericEntity = new GenericEntity<>(usersMap.values()){}; // generic entity works as type-erasure it replaces all type parameters in generic types with their bounds or Object if the type parameters are unbounded
         ResponseBuilder responseBuilder = Response.ok(genericEntity);
         return responseBuilder.build();
-
+        
     }
 
+
     /**
-     * Method handling HTTP GET request. The returned object will be sent according
-     * to the entered id in the url
+     * Method handling HTTP GET request. The returned object will be sent according to the entered id in the url
      * to the client as "XML" media type.
      *
      * @return Object that will be returned as XML response.
@@ -75,28 +76,38 @@ public class UserController {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_XML)
-    public Response getUserById(@PathParam("id") int userId) {
-        ResponseBuilder responseBuilder = Response.ok(usersMap.get(userId));
-        return responseBuilder.build();
+    public Response getUserById(@PathParam("id") int userId){
+        var user = usersMap.get(userId);
+        System.out.println(user);
+        if(user != null){
+            ResponseBuilder responseBuilder = Response.ok(user);
+            return responseBuilder.build();
+        }
+        // else throw new WebApplicationException(); // default "internal-server-error" => 500
+        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
     }
 
+
+
     /**
-     * Method handling HTTP POST request. The added object obtained from request
-     * body
+     * Method handling HTTP POST request. The added object obtained from request body
      * then send to the client as simple text message media type.
      *
      * @return success message as text response
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
-    public String addUser(UserModel user) {
+    public String addUser(UserModel user){
         usersMap.put(idCounter.getAndIncrement(), user);
         return "added succefully";
     }
 
+
+
     /**
-     * Method handling HTTP PUT request. The searched object using entered id
-     * will be replaced by the object entered in the message body
+     * Method handling HTTP PUT request. The searched object using entered id 
+     * will be replaced by the object entered in the message body 
      * then send to the client simple text message media type.
      *
      * @return success message as text response
@@ -105,15 +116,16 @@ public class UserController {
     @Path("{id}")
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_XML)
-    public Response editUser(@PathParam("id") int userId, UserModel user) {
+    public Response editUser(@PathParam("id") int userId, UserModel user){
 
-        ResponseBuilder responseBuilder = Response.ok("updated succefully");
-        if (usersMap.containsKey(userId)) { // user exist
+        ResponseBuilder responseBuilder  = Response.ok("updated succefully");
+        if(usersMap.containsKey(userId)){ // user exist
             usersMap.put(userId, user);
             return responseBuilder.build();
         }
-        return responseBuilder.entity("invalid user").status(404).build(); // status will be overwritten
+        throw new UserNotFoundException();
 
     }
+
 
 }
