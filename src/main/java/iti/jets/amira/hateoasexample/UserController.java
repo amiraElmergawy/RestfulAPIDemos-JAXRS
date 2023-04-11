@@ -86,22 +86,25 @@ public class UserController {
         }
         Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
         user.setLinks(Arrays.asList(self));
-        ResponseBuilder responseBuilder = Response.ok(user);
-        return responseBuilder.build();
+        return Response.ok(user).build(); // links will appear in the response body as it is embedded in the object
     }
 
     /**
      * Method handling HTTP POST request. The added object obtained from request
      * body
-     * then send to the client as simple text message media type.
-     *
-     * @return success message as text response
+     * 
+     * @return response with status code 201 and object "Location" in the header
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
-    public String addUser(UserModel user) {
-        usersMap.put(idCounter.getAndIncrement(), user);
-        return "added succefully";
+    public Response addUser(UserModel user, @Context UriInfo uriInfo) {
+        Integer userId = idCounter.getAndIncrement();
+        usersMap.put(userId, user);
+        // return Response.ok("added succefully").link(uriInfo.getBaseUri().toString().concat(userId.toString()), "created-at").build(); // link will appear in the response header with "link" as the header key
+    
+        Link link = Link.fromPath(uriInfo.getBaseUri().toString().concat(userId.toString())).build();
+        return Response.created(link.getUri()).build(); // link will appear in the response header with "Location" as the header key
+    
     }
 
     /**
