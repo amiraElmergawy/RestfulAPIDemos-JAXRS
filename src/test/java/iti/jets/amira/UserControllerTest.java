@@ -11,38 +11,36 @@ import jakarta.ws.rs.core.Response;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserControllerTest {
-    String url = "http://localhost:9090/rest-jersey/webapi/v5/users";
+    private String restUri = "http://localhost:9090/rest-jersey/webapi/v5/users";
+    private Client client = ClientBuilder.newClient();
+    public static final int HTTP_OK = 200;
 
     @Test
     public void TestGetAllUsers() {
-        Client client = ClientBuilder.newClient();
-        Response response = client.target(url)
+        Response response = client.target(restUri)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
-        assertEquals(200, response.getStatus());
-    }
-
-    @Test
-    public void TestGetUserById() {
-        Client client = ClientBuilder.newClient();
-        Response response = client.target(url)
-                .path("{id}")
-                .resolveTemplate("id", 100)
-                .request(MediaType.APPLICATION_XML)
-                .get();
-        assertEquals(200, response.getStatus());
+        assertEquals(HTTP_OK, response.getStatus());
     }
 
     @Test
     public void TestCreateUser() {
-        Client client = ClientBuilder.newClient();
         UserModel user = new UserModel("amira", "123");
-        Response response = client.target(url)
+        Response response = client.target(restUri)
                 .request()
                 .post(Entity.entity(user, MediaType.APPLICATION_JSON));
-        assertEquals(200, response.getStatus());
+        assertEquals(HTTP_OK, response.getStatus());
         System.out.println(response.getEntity());
     }
 
+    @Test
+    public void TestGetUserById() {
+        Response response = client.target(restUri)
+                .path("{id}")
+                .resolveTemplate("id", 100)
+                .request(MediaType.APPLICATION_XML)
+                .get();
+        assertEquals(HTTP_OK, response.getStatus());
+    }
 
 }
