@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "8af76e09-e561-4dc9-bf57-986cce7a2926",
+		"name": "simple-example",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests a user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "10348227-8af76e09-e561-4dc9-bf57-986cce7a2926"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9090/rest-jersey/webapi/v1/users",
+			"id": "73a5fcd5-643c-4ead-abd5-5e832e196b16",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9090/rest-jersey/webapi/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"rest-jersey",
+						"webapi",
+						"v1",
+						"users"
+					]
+				},
+				"description": "Get method that handles gat-all-users request"
+			},
+			"response": [
+				{
+					"id": "5bf7d6f3-561b-4702-b26f-e8e4bed1827e",
+					"name": "http://localhost:9090/rest-jersey/webapi/v1/users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 07:31:19 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"100\": {\n        \"password\": \"123\",\n        \"username\": \"user1\"\n    },\n    \"101\": {\n        \"password\": \"456\",\n        \"username\": \"user2\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:9090/rest-jersey/webapi/v1/users/{userId}",
+			"id": "9fd1975d-6ab5-491d-a9ab-6563e74291dc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9090/rest-jersey/webapi/v1/users/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"rest-jersey",
+						"webapi",
+						"v1",
+						"users",
+						"100"
+					]
+				},
+				"description": "Get method that handles gat-user-by-id request"
+			},
+			"response": [
+				{
+					"id": "a054882d-a271-4bbd-a3c8-37bb5a11febe",
+					"name": "http://localhost:9090/rest-jersey/webapi/v1/users/{userId}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v1/users/{userId}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v1",
+								"users",
+								"{userId}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=utf-8"
+						},
+						{
+							"key": "Content-Language",
+							"value": "en"
+						},
+						{
+							"key": "Content-Length",
+							"value": "713"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 07:32:17 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 404 – Not Found</h1><hr class=\"line\" /><p><b>Type</b> Status Report</p><p><b>Message</b> Not Found</p><p><b>Description</b> The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.</p><hr class=\"line\" /><h3>Apache Tomcat/10.1.5</h3></body></html>"
+				},
+				{
+					"id": "58e66c4b-a59c-49e9-9449-1e6220577417",
+					"name": "http://localhost:9090/rest-jersey/webapi/v1/users/{userId}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v1/users/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v1",
+								"users",
+								"100"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/xml"
+						},
+						{
+							"key": "Content-Length",
+							"value": "128"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 07:33:26 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<userModel>\n    <username>user1</username>\n    <password>123</password>\n</userModel>"
+				}
+			]
+		}
+	]
+}

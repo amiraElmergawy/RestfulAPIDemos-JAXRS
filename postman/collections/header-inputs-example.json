@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "750a0d0c-7120-41fb-a5f2-d7c3b2de0a9a",
+		"name": "header-inputs-example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "10348227-750a0d0c-7120-41fb-a5f2-d7c3b2de0a9a"
+	},
+	"item": [
+		{
+			"name": "all-users",
+			"id": "c7d855cf-fe48-4c5e-9050-137e8d622bc4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/rest-jersey/webapi/v4/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"rest-jersey",
+						"webapi",
+						"v4",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "bd96367d-ddd7-4fe2-9e53-815362417c7a",
+					"name": "all-users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v2/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "49"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 07:46:56 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"password\": \"123\",\n        \"username\": \"Amira Elmergawy\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "add-user",
+			"id": "68dcfce0-e0c0-4c8b-a94a-4cc982abcd3b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "AmiraElmergawy",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/rest-jersey/webapi/v2/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"rest-jersey",
+						"webapi",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "4a53771c-745e-45ef-a1e9-a7af42205843",
+					"name": "add-user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "AmiraElmergawy",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v2/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 08:29:17 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "added succefully"
+				}
+			]
+		},
+		{
+			"name": "get-user-id",
+			"id": "6a40e683-2ab7-419d-8904-e8df85c26546",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/rest-jersey/webapi/v2/users/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"rest-jersey",
+						"webapi",
+						"v2",
+						"users",
+						"100"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "800e444b-d8ef-4996-bcd0-17a79e48c04a",
+					"name": "get-user-id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v2/users/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v2",
+								"users",
+								"100"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/xml"
+						},
+						{
+							"key": "Content-Length",
+							"value": "137"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 09:13:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<userModel>\n    <username>AmiraElmergawy</username>\n    <password>123</password>\n</userModel>"
+				}
+			]
+		},
+		{
+			"name": "get-user-username-password",
+			"id": "d90d360e-6017-4ec4-931d-3a908aff5363",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/rest-jersey/webapi/v2/users/AmiraElmergawy-123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"rest-jersey",
+						"webapi",
+						"v2",
+						"users",
+						"AmiraElmergawy-123"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "28467914-ab84-4397-9203-58b84bd920bf",
+					"name": "get-user-username-password",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/rest-jersey/webapi/v2/users/AmiraElmergawy-123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"rest-jersey",
+								"webapi",
+								"v2",
+								"users",
+								"AmiraElmergawy-123"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Apr 2023 08:30:06 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=20"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"password\": \"123\",\n    \"username\": \"AmiraElmergawy\"\n}"
+				}
+			]
+		}
+	]
+}
