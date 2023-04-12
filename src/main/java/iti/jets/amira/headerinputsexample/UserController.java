@@ -51,7 +51,7 @@ public class UserController {
      * @return Object that will be returned as XML response.
      */
     @GET
-    @Path("{id://d+}") // regex matches digits only
+    @Path("{id}") // regex matches digits only
     @Produces(MediaType.APPLICATION_XML)
     public UserModel getUserById(@PathParam("id") int userId){
         return usersMap.get(userId);
